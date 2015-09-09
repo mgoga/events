@@ -8,9 +8,25 @@
     <link rel="stylesheet" href="custom.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="http://api.eventful.com/js/api"></script>
+    <!--<script src="http://api.eventful.com/js/api"></script>-->
+
 </head>
 <body>
+    <script>
+        function showEvents(data) {
+            console.log(data.events);
+            var outPut = "";
+            //var len = data.events.length;
+            //for (var i = 0; i < len; i++) {
+                outPut += "<div class='panel panel-primary'><div class='panel-heading'><h3>";
+                outPut += data.events;
+                outPut += "</h3></div><div class='panel-body'><p>";
+                //outPut += data.events[i].start_time + ". " + data.events[i].venue_address + ". " + data.events[i].description;
+                outPut += "</p></div></div>";
+            //}
+            document.getElementById("outPut").innerHTML = outPut;
+        }
+    </script>
 
 <div class="container">
     <div class="page-header">
@@ -32,6 +48,7 @@
 
 </footer>
 </div>
-<script src="events.js"></script>
+<!--<script src="events.js"></script>-->
+<script src="http://api.eventful.com/json/events/search?l=Königs+Wusterhausen&sort_order=date&app_key=55qhXBTHtvfkSLsv&callback=showEvents"></script>
 </body>
 </html>
