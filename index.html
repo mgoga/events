@@ -8,48 +8,51 @@
     <link rel="stylesheet" href="custom.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <!--<script src="http://api.eventful.com/js/api"></script>-->
-
 </head>
 <body>
+    <div class="container">
+        <div class="page-header">
+          <h1 class="text-center">Demnächst in Königs Wusterhausen:</h1>
+        </div>
+
+        <div id="outPut" class="panel-group"></div>
+
+    <footer>
+        <p class="text-center">&copy; Malte Goga 2015</p>
+        <div class="eventful-badge eventful-small">
+            <img src="http://api.eventful.com/images/powered/eventful_58x20.gif"
+            alt="Local Events, Concerts, Tickets">
+            <p><a href="http://eventful.com/">Events</a> by Eventful</p>
+        </div>
+    </footer>
+    </div>
     <script>
-        function showEvents(data) {
-            events = data.events.event;
-            console.log(events);
-            var outPut = "";
-            var len = events.length;
-            for (var i = 0; i < len; i++) {
-                outPut += "<div class='panel panel-primary'><div class='panel-heading'><h3>";
-                outPut += events[i].title;
-                outPut += "</h3></div><div class='panel-body'><p>";
-                outPut += events[i].start_time + ". " + events[i].venue_address + ". " + events[i].description;
-                outPut += "</p></div></div>";
-            }
-            document.getElementById("outPut").innerHTML = outPut;
+    function showEvents(data) {
+        var events = data.events.event;
+        var outPut = "";
+        for (var i = 0; i < events.length; i++) {
+            outPut += "<div class='panel panel-info text-center'><div class='panel-heading'><h4>";
+            outPut += events[i].title;
+            outPut += "</h4></div><div class='panel-body'><p>";
+            outPut += events[i].start_time;
+            outPut += "<br>";
+            if (!events[i].venue_address) {
+                outPut += "Für diese Event gibt es keine Adresse. <br>";
+            } else {
+                outPut += events[i].venue_address;
+                outPut += "<br>";
+            };
+            if (!events[i].description) {
+                outPut += "Für dieses Event gibt es keine Beschreibung.";
+            } else {
+                outPut += events[i].description;
+            };
+            outPut += "</p></div></div>";
         }
+        document.getElementById("outPut").innerHTML = outPut;
+    }
     </script>
 
-<div class="container">
-    <div class="page-header">
-      <h1 class="text-center">Demnächst in Königs Wusterhausen:</h1>
-    </div>
-
-    <div id="outPut" class="panel-group">
-
-    </div>
-
-
-<footer>
-    <p class="text-center">&copy; Malte Goga 2015</p>
-    <div class="eventful-badge eventful-small">
-      <img src="http://api.eventful.com/images/powered/eventful_58x20.gif"
-        alt="Local Events, Concerts, Tickets">
-      <p><a href="http://eventful.com/">Events</a> by Eventful</p>
-    </div>
-
-</footer>
-</div>
-<!--<script src="events.js"></script>-->
-<script src="http://api.eventful.com/json/events/search?l=Königs+Wusterhausen&sort_order=date&app_key=55qhXBTHtvfkSLsv&callback=showEvents"></script>
+    <script src="http://api.eventful.com/json/events/search?l=Königs+Wusterhausen&within=2.5&units=km&page_size=9&sort_order=date&app_key=test_key&callback=showEvents"></script>
 </body>
 </html>
