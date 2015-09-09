@@ -14,16 +14,17 @@
 <body>
     <script>
         function showEvents(data) {
-            console.log(data.events);
+            events = data.events.event;
+            console.log(events);
             var outPut = "";
-            //var len = data.events.length;
-            //for (var i = 0; i < len; i++) {
+            var len = events.length;
+            for (var i = 0; i < len; i++) {
                 outPut += "<div class='panel panel-primary'><div class='panel-heading'><h3>";
-                outPut += data.events;
+                outPut += events[i].title;
                 outPut += "</h3></div><div class='panel-body'><p>";
-                //outPut += data.events[i].start_time + ". " + data.events[i].venue_address + ". " + data.events[i].description;
+                outPut += events[i].start_time + ". " + events[i].venue_address + ". " + events[i].description;
                 outPut += "</p></div></div>";
-            //}
+            }
             document.getElementById("outPut").innerHTML = outPut;
         }
     </script>
