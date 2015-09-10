@@ -14,7 +14,7 @@
         <div class="page-header">
           <h1 class="text-center">Demnächst in Königs Wusterhausen:</h1>
         </div>
-
+        <!--Hier kommen die verarbeiteten Ergebnisse rein:-->
         <div id="outPut" class="panel-group"></div>
 
     <footer>
@@ -26,33 +26,11 @@
         </div>
     </footer>
     </div>
-    <script>
-    function showEvents(data) {
-        var events = data.events.event;
-        var outPut = "";
-        for (var i = 0; i < events.length; i++) {
-            outPut += "<div class='panel panel-info text-center'><div class='panel-heading'><h4>";
-            outPut += events[i].title;
-            outPut += "</h4></div><div class='panel-body'><p>";
-            outPut += events[i].start_time;
-            outPut += "<br>";
-            if (!events[i].venue_address) {
-                outPut += "Für diese Event gibt es keine Adresse. <br>";
-            } else {
-                outPut += events[i].venue_address;
-                outPut += "<br>";
-            };
-            if (!events[i].description) {
-                outPut += "Für dieses Event gibt es keine Beschreibung.";
-            } else {
-                outPut += events[i].description;
-            };
-            outPut += "</p></div></div>";
-        }
-        document.getElementById("outPut").innerHTML = outPut;
-    }
-    </script>
-
-    <script src="http://api.eventful.com/json/events/search?l=Königs+Wusterhausen&within=2.5&units=km&page_size=9&sort_order=date&app_key=test_key&callback=showEvents"></script>
+    <script src="events.js"></script>
+    <!--Hier folgt die eigentliche API-Abfrage.
+    Um auf mehr als fünf Events zu kommen, mit 2,5 Km Umkreis.
+    Die Abfrage-Ergebnisse werden schließlich an die "showEvents"-function geleitet,
+    die sich in der "event.js"-Datei befindet.-->
+    <script src="http://api.eventful.com/json/events/search?l=Königs+Wusterhausen&within=2.5&units=km&page_size=9&sort_order=date&app_key=55qhXBTHtvfkSLsv&callback=showEvents"></script>
 </body>
 </html>
